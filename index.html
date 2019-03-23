@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Your Website</title>
+  <title>Employee Info Website</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://canvasjs.com/assets/css/jquery-ui.1.11.2.min.css" rel="stylesheet" />
   <style>
@@ -39,49 +39,42 @@
           var dataPoints = [];
 
           var parseObj = JSON.parse(data);
-          console.log("parseObj From API", parseObj);
 
           for (var i = 0; i < parseObj.length; i++) {
             $(".employeeData")
               .append("<tr> <td>" + i + "</td> <td>" + parseObj[i].id + "</td> <td> " + parseObj[i].employee_name + "</td> <td> " + parseObj[i].employee_salary + "</td> <td> " + parseObj[i].employee_age + "</td> </tr>")
           }
-
-          ageBetweenZeroToOneTwenty = parseObj.filter((everyage) => everyage.employee_age <= 120)
-          console.log("ageBetweenZeroToOneTwenty  is ", ageBetweenZeroToOneTwenty);
+          ageBetweenZeroToOneTwenty = parseObj.filter((everyEmployeeAge) => everyEmployeeAge.employee_age <= 120)
 
           for (var i = 0; i < ageBetweenZeroToOneTwenty.length; i++) {
-            console.log("ageBetweenZeroToOneTwenty[i]  is ", parseInt(ageBetweenZeroToOneTwenty[i].employee_age));
-            console.log("count  is ", i);
 
             dataPoints.push({
               x: parseInt(ageBetweenZeroToOneTwenty[i].employee_age),
               y: i
             })
-            console.log("dataPoints  is ", dataPoints);
-
-
-            this.options = {
-              animationEnabled: true,
-              title: {
-                text: "Employees Data "
-              },
-              axisY: {
-                title: "Employee Counts",
-                titleFontSize: 24
-              },
-              axisX: {
-                title: "Employee's Age between 0 and 120 ",
-                titleFontSize: 24,
-              },
-
-              data: [{
-                type: "column", //change it to line, area, bar, pie, etc	
-                dataPoints
-              }]
-            };
-
-
           }
+          console.log("dataPoints  is ", dataPoints);
+
+
+          this.options = {
+            animationEnabled: true,
+            title: {
+              text: "Employees Data "
+            },
+            axisY: {
+              title: "Employee Counts",
+              titleFontSize: 24
+            },
+            axisX: {
+              title: "Employee's Age between 0 and 120 ",
+              titleFontSize: 24,
+            },
+
+            data: [{
+              type: "column", //change it to line, area, bar, pie, etc	
+              dataPoints
+            }]
+          };
 
           $("#chartContainer").CanvasJSChart(this.options);
 
