@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Employee Info Website</title>
@@ -13,49 +11,39 @@
       border-collapse: collapse;
       width: 100%;
     }
-
     td,
     th {
       border: 1px solid #dddddd;
       text-align: left;
       padding: 8px;
     }
-
     tr:nth-child(even) {
       background-color: #dddddd;
     }
   </style>
-
   <script>
-
     window.onload = function () {
-
       var ageBetweenZeroToOneTwenty;
       var options;
-
       var dataFromAPI = $.get(
         "http://dummy.restapiexample.com/api/v1/employees",
         function (data) {
           var dataPoints = [];
-
           var parseObj = JSON.parse(data);
-
           for (var i = 0; i < parseObj.length; i++) {
             $(".employeeData")
               .append("<tr> <td>" + i + "</td> <td>" + parseObj[i].id + "</td> <td> " + parseObj[i].employee_name + "</td> <td> " + parseObj[i].employee_salary + "</td> <td> " + parseObj[i].employee_age + "</td> </tr>")
           }
+
           ageBetweenZeroToOneTwenty = parseObj.filter((everyEmployeeAge) => everyEmployeeAge.employee_age <= 120)
 
           for (var i = 0; i < ageBetweenZeroToOneTwenty.length; i++) {
-
             dataPoints.push({
               x: parseInt(ageBetweenZeroToOneTwenty[i].employee_age),
               y: i
             })
           }
           console.log("dataPoints  is ", dataPoints);
-
-
           this.options = {
             animationEnabled: true,
             title: {
@@ -69,25 +57,18 @@
               title: "Employee's Age between 0 and 120 ",
               titleFontSize: 24,
             },
-
             data: [{
               type: "column", //change it to line, area, bar, pie, etc	
               dataPoints
             }]
           };
-
           $("#chartContainer").CanvasJSChart(this.options);
-
-
         });
     }
   </script>
-
 </head>
-
 <body>
   <div id="chartContainer" style="height: 300px; width: 100%;margin-bottom:3em;"></div>
-
   <section>
     <table class="employeeData">
       <tr>
@@ -97,16 +78,10 @@
         <th>Empolye Age</th>
         <th>Empolye Salary</th>
       </tr>
-
     </table>
   </section>
 
-
-
-
   <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-
 </body>
-
 </html>
