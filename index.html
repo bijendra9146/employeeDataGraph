@@ -32,10 +32,18 @@
           var parseObj = JSON.parse(data);
           for (var i = 0; i < parseObj.length; i++) {
             $(".employeeData")
-              .append("<tr> <td>" + i + "</td> <td>" + parseObj[i].id + "</td> <td> " + parseObj[i].employee_name + "</td> <td> " + parseObj[i].employee_salary + "</td> <td> " + parseObj[i].employee_age + "</td> </tr>")
+              .append("<tr> <td>" + i + "</td> <td>" + parseObj[i].id + "</td> <td> " +
+               parseObj[i].employee_name + "</td> <td> " + parseObj[i].employee_salary + 
+              "</td> <td> " + parseObj[i].employee_age + "</td> </tr>")
           }
 
-          ageBetweenZeroToOneTwenty = parseObj.filter((everyEmployeeAge) => everyEmployeeAge.employee_age <= 120)
+          ageBetweenZeroToOneTwenty = parseObj.filter((employeeData) => {
+            console.log("employee Data",employeeData)  
+            return employeeData.employee_age <= 120;
+          }           
+          )
+
+          console.log("ageBetween Zero To One Twenty",ageBetweenZeroToOneTwenty);
 
           for (var i = 0; i < ageBetweenZeroToOneTwenty.length; i++) {
             dataPoints.push({
@@ -75,8 +83,9 @@
         <th>SrNo.</th>
         <th>ID</th>
         <th>Empolye Name</th>
-        <th>Empolye Age</th>
         <th>Empolye Salary</th>
+        <th>Empolye Age</th>
+
       </tr>
     </table>
   </section>
